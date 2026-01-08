@@ -20,6 +20,8 @@ public:
             cnt++;
             temp = temp->next;
         }
+        if(k%cnt == 0)
+            return head;
         ListNode* slow = head;
         ListNode* fast = head;
         for(int i = 0; i < (k%cnt); i++)
@@ -29,16 +31,9 @@ public:
             slow = slow->next;
             fast = fast->next;
         }
-        if(slow->next)
-        {
-            ListNode* newHead = slow->next;
-            slow->next = nullptr;
-            temp = newHead;
-            while(temp->next)
-                temp = temp->next;
-            temp->next = head;
-            return newHead;
-        }
-        return head;
+        ListNode* newHead = slow->next;
+        slow->next = nullptr;
+        fast->next = head;
+        return newHead;
     }
 };
